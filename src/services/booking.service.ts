@@ -3,10 +3,20 @@ import { Booking } from '../models/booking.model';
 import { BookingRepository } from '../repositories/booking.repository';
 import { isOverlapping } from '../utils/time';
 
+const ROOMS = ['A25', 'A26', 'A27', 'A28', 'A29', 'A30'];
+
 export class BookingService {
   constructor(private repo: BookingRepository) {}
 
-  create(roomId: string, start: Date, end: Date): Booking {
+  private validateRoom(roomId: string): void {
+    if (!ROOMS.includes(roomId)) {
+      throw new Error(
+        `Huonetta ei löydy. Sallitut huoneet: ${ROOMS.join(', ')}.`
+      );
+    }
+  }
+
+  private validateTimeRange(start: Date, end: Date): void {
     const now = new Date();
 
     if (start >= end) {
@@ -18,6 +28,11 @@ export class BookingService {
     if (start < now) {
       throw new Error('Kokoushuoneen varaus ei voi olla menneisyydessä.');
     }
+  }
+
+  create(roomId: string, start: Date, end: Date): Booking {
+    this.validateRoom(roomId);
+    this.validateTimeRange(start, end);
 
     const existing = this.repo.getByRoom(roomId);
     for (const booking of existing) {
@@ -50,5 +65,18 @@ export class BookingService {
 
   listByRoom(roomId: string): Booking[] {
     return this.repo.getByRoom(roomId);
+  }
+
+  listAvailableRooms(start: Date, end: Date): string[] {
+    this.validateTimeRange(start, end);
+
+    const allBookings = this.repo.getAll();
+    return ROOMS.filter((roomId) => {
+      return !allBookings.some(
+        (booking) =>
+          booking.roomId === roomId &&
+          isOverlapping(booking.start, booking.end, start, end)
+      );
+    });
   }
 }

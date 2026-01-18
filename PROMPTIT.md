@@ -597,4 +597,19 @@ Jos haluat, seuraavaksi voin:
 
 <br>
 
-## Minä:
+## Minä Cursorille:
+
+Varaajalla ei ole tietoa olemassa olevista huoneista. Luodaan siis valmiiksi luodut huoneet: A25, A26, A27, A28, A29, A30. Kun huoneen varaaja haluaa nähdä vapaana olevia huoneita niin teemme sitä varten oman endpointin.
+
+Toimi ohjeiden mukaisesti ja lisää maininta myös README.md tiedostoon.
+
+## Cursor:
+
+Teki tarvittavat korjaukset suoraan koodiin.
+
+--> Added predefined rooms, validated room IDs, and exposed an availability endpoint. Updated README.md to document the rooms and new endpoint.
+What changed and why:
+BookingService now enforces valid rooms and provides listAvailableRooms() for querying availability.
+bookings.routes.ts adds GET /rooms/available with start/end query validation.
+README.md mentions the fixed room list and documents the availability endpoint.
+If you want, I can also add tests or a small curl example for the new endpoint.

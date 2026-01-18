@@ -14,6 +14,11 @@ const createSchema = z.object({
   end: z.string().datetime(),
 });
 
+const availabilitySchema = z.object({
+  start: z.string().datetime(),
+  end: z.string().datetime(),
+});
+
 bookingRouter.post('/bookings', (req, res) => {
   try {
     const body = createSchema.parse(req.body);
@@ -40,4 +45,17 @@ bookingRouter.delete('/bookings/:id', (req, res) => {
 bookingRouter.get('/rooms/:roomId/bookings', (req, res) => {
   const bookings = service.listByRoom(req.params.roomId);
   res.json(bookings);
+});
+
+bookingRouter.get('/rooms/available', (req, res) => {
+  try {
+    const query = availabilitySchema.parse(req.query);
+    const rooms = service.listAvailableRooms(
+      new Date(query.start),
+      new Date(query.end)
+    );
+    res.json(rooms);
+  } catch (err: any) {
+    res.status(400).json({ error: err.message });
+  }
 });
