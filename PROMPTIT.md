@@ -1,11 +1,10 @@
-## Minä: 
-Liitteenä on erään yrityksen esitehtävä rooliin: SAP Technical Consultat. Analysoi tehtävä ja toteuta se mahdollisimman hyvin käyttäen Typescriptiä ja parasta mahdollista frameworkkia tähän tehtävään liittyen. Anna sen jälkeen tarkat ohjeet, että minkä vuoksi seuraavat teknologiat on valittu ja mitä menetelmää käytetään. Dokumentoi sen jälkeen README.md tiedostoon miten projekti otetaan käyttöön, niin että kuka vain saisi projektia helposti testattua. 
+## Minä:
+
+Liitteenä on erään yrityksen esitehtävä rooliin: SAP Technical Consultat. Analysoi tehtävä ja toteuta se mahdollisimman hyvin käyttäen Typescriptiä ja parasta mahdollista frameworkkia tähän tehtävään liittyen. Anna sen jälkeen tarkat ohjeet, että minkä vuoksi seuraavat teknologiat on valittu ja mitä menetelmää käytetään. Dokumentoi sen jälkeen README.md tiedostoon miten projekti otetaan käyttöön, niin että kuka vain saisi projektia helposti testattua.
 
 <br>
 
-
-
-## ChatGPT:n vastaus: 
+## ChatGPT:n vastaus:
 
 # Meeting Room Booking API (TypeScript)
 
@@ -13,17 +12,17 @@ Liitteenä on erään yrityksen esitehtävä rooliin: SAP Technical Consultat. A
 
 Toteutettava järjestelmä on **yksinkertainen REST-rajapinta**, joka mahdollistaa kokoushuoneiden varaamisen. Keskeistä ei ole sovelluksen laajuus vaan:
 
-* selkeä **toimintalogiikka**
-* **virheiden estäminen** (päällekkäiset varaukset, menneisyys, väärät aikavälit)
-* hyvin perustellut **teknologiavalinnat**
-* helposti testattava ja ymmärrettävä kokonaisuus
+- selkeä **toimintalogiikka**
+- **virheiden estäminen** (päällekkäiset varaukset, menneisyys, väärät aikavälit)
+- hyvin perustellut **teknologiavalinnat**
+- helposti testattava ja ymmärrettävä kokonaisuus
 
 Tein seuraavat **oletukset** (kuten tehtävässä sallitaan):
 
-* Käyttäjähallintaa ei ole → API ei autentikoi käyttäjiä
-* Huoneet tunnistetaan `roomId`-merkkijonolla
-* Aikavälit käsitellään ISO 8601 -muodossa (UTC)
-* Tietokanta on täysin muistinvarainen ja nollautuu käynnistyksessä
+- Käyttäjähallintaa ei ole → API ei autentikoi käyttäjiä
+- Huoneet tunnistetaan `roomId`-merkkijonolla
+- Aikavälit käsitellään ISO 8601 -muodossa (UTC)
+- Tietokanta on täysin muistinvarainen ja nollautuu käynnistyksessä
 
 ---
 
@@ -31,29 +30,29 @@ Tein seuraavat **oletukset** (kuten tehtävässä sallitaan):
 
 ### TypeScript
 
-* Staattinen tyypitys vähentää loogisia virheitä
-* Erinomainen backend-tuki
-* Todella yleinen yritysympäristöissä (myös SAP-ekosysteemissä)
+- Staattinen tyypitys vähentää loogisia virheitä
+- Erinomainen backend-tuki
+- Todella yleinen yritysympäristöissä (myös SAP-ekosysteemissä)
 
 ### Node.js + Fastify
 
 **Fastify** valittiin Expressin sijaan:
 
-* Selvästi parempi suorituskyky
-* Sisäänrakennettu skeemapohjainen validointi
-* Modernimpi ja yritystason käyttöön sopiva
+- Selvästi parempi suorituskyky
+- Sisäänrakennettu skeemapohjainen validointi
+- Modernimpi ja yritystason käyttöön sopiva
 
 ### Zod (validointi)
 
-* Selkeä ja luettava
-* Toimii hyvin TypeScriptin kanssa
-* Virheiden käsittely yksiselitteistä
+- Selkeä ja luettava
+- Toimii hyvin TypeScriptin kanssa
+- Virheiden käsittely yksiselitteistä
 
 ### In-memory repository -malli
 
-* Vastaa tehtävän vaatimusta
-* Helppo testata
-* Selkeä erotus liiketoimintalogiikan ja tallennuksen välillä
+- Vastaa tehtävän vaatimusta
+- Helppo testata
+- Selkeä erotus liiketoimintalogiikan ja tallennuksen välillä
 
 ---
 
@@ -73,9 +72,9 @@ src/
 
 ### Miksi tämä malli?
 
-* Helppo testata
-* Helppo laajentaa (esim. oikea tietokanta)
-* Selkeä vastuunjako
+- Helppo testata
+- Helppo laajentaa (esim. oikea tietokanta)
+- Selkeä vastuunjako
 
 ---
 
@@ -84,16 +83,16 @@ src/
 ### Varausten päällekkäisyyden tarkistus
 
 ```ts
-existing.start < newEnd && newStart < existing.end
+existing.start < newEnd && newStart < existing.end;
 ```
 
 Tämä on luotettava ja yleisesti käytetty tapa estää päällekkäiset aikavälit.
 
 ### Ajan validointi
 
-* Aloitus ei saa olla menneisyydessä
-* Aloitus < lopetus
-* Aika käsitellään aina `Date`-objekteina
+- Aloitus ei saa olla menneisyydessä
+- Aloitus < lopetus
+- Aika käsitellään aina `Date`-objekteina
 
 ---
 
@@ -125,8 +124,8 @@ Tämä on luotettava ja yleisesti käytetty tapa estää päällekkäiset aikav�
 
 ### Vaatimukset
 
-* Node.js >= 18
-* npm tai pnpm
+- Node.js >= 18
+- npm tai pnpm
 
 ### Asennus
 
@@ -154,9 +153,9 @@ http://localhost:3000
 
 API:ta voi testata esimerkiksi:
 
-* curl
-* Postman
-* HTTPie
+- curl
+- Postman
+- HTTPie
 
 Esimerkki:
 
@@ -172,10 +171,10 @@ curl -X POST http://localhost:3000/bookings \
 
 Tämä ratkaisu:
 
-* Täyttää kaikki tehtävän vaatimukset
-* On helppo testata ja ymmärtää
-* Noudattaa hyviä backend-kehityskäytäntöjä
-* On helposti laajennettavissa tuotantokäyttöön
+- Täyttää kaikki tehtävän vaatimukset
+- On helppo testata ja ymmärtää
+- Noudattaa hyviä backend-kehityskäytäntöjä
+- On helposti laajennettavissa tuotantokäyttöön
 
 Painopiste ei ole vain toimivassa koodissa, vaan **ammattimaisessa rakenteessa ja perustelluissa valinnoissa**.
 
@@ -219,11 +218,11 @@ Mitä haluat tehdä seuraavaksi?
 
 <br>
 
-## Minä: 
+## Minä:
+
 Kuulostaa hyvältä nuo alustavat valinnat, pysytään kuitenkin express pohjassa ja luo minulle nyt ne kaikki koodit, jotta voisin vain kopioida ja kaikki toimisi kuten pitäisi.
 
 <br>
-
 
 ## ChatGPT:
 
@@ -306,7 +305,7 @@ meeting-room-api/
 ## src/index.ts
 
 ```ts
-import { app } from "./app";
+import { app } from './app';
 
 const PORT = 3000;
 
@@ -320,13 +319,13 @@ app.listen(PORT, () => {
 ## src/app.ts
 
 ```ts
-import express from "express";
-import { bookingRouter } from "./routes/bookings.routes";
+import express from 'express';
+import { bookingRouter } from './routes/bookings.routes';
 
 export const app = express();
 
 app.use(express.json());
-app.use("/", bookingRouter);
+app.use('/', bookingRouter);
 ```
 
 ---
@@ -347,13 +346,13 @@ export interface Booking {
 ## src/repositories/booking.repository.ts
 
 ```ts
-import { Booking } from "../models/booking.model";
+import { Booking } from '../models/booking.model';
 
 export class BookingRepository {
   private bookings: Booking[] = [];
 
   getByRoom(roomId: string): Booking[] {
-    return this.bookings.filter(b => b.roomId === roomId);
+    return this.bookings.filter((b) => b.roomId === roomId);
   }
 
   getAll(): Booking[] {
@@ -365,7 +364,7 @@ export class BookingRepository {
   }
 
   delete(id: string): boolean {
-    const index = this.bookings.findIndex(b => b.id === id);
+    const index = this.bookings.findIndex((b) => b.id === id);
     if (index === -1) return false;
     this.bookings.splice(index, 1);
     return true;
@@ -378,7 +377,12 @@ export class BookingRepository {
 ## src/utils/time.ts
 
 ```ts
-export function isOverlapping(aStart: Date, aEnd: Date, bStart: Date, bEnd: Date): boolean {
+export function isOverlapping(
+  aStart: Date,
+  aEnd: Date,
+  bStart: Date,
+  bEnd: Date
+): boolean {
   return aStart < bEnd && bStart < aEnd;
 }
 ```
@@ -388,10 +392,10 @@ export function isOverlapping(aStart: Date, aEnd: Date, bStart: Date, bEnd: Date
 ## src/services/booking.service.ts
 
 ```ts
-import { v4 as uuid } from "uuid";
-import { Booking } from "../models/booking.model";
-import { BookingRepository } from "../repositories/booking.repository";
-import { isOverlapping } from "../utils/time";
+import { v4 as uuid } from 'uuid';
+import { Booking } from '../models/booking.model';
+import { BookingRepository } from '../repositories/booking.repository';
+import { isOverlapping } from '../utils/time';
 
 export class BookingService {
   constructor(private repo: BookingRepository) {}
@@ -400,17 +404,17 @@ export class BookingService {
     const now = new Date();
 
     if (start >= end) {
-      throw new Error("Start time must be before end time");
+      throw new Error('Start time must be before end time');
     }
 
     if (start < now) {
-      throw new Error("Booking cannot be in the past");
+      throw new Error('Booking cannot be in the past');
     }
 
     const existing = this.repo.getByRoom(roomId);
     for (const booking of existing) {
       if (isOverlapping(booking.start, booking.end, start, end)) {
-        throw new Error("Booking overlaps with existing booking");
+        throw new Error('Booking overlaps with existing booking');
       }
     }
 
@@ -418,7 +422,7 @@ export class BookingService {
       id: uuid(),
       roomId,
       start,
-      end
+      end,
     };
 
     this.repo.save(booking);
@@ -428,7 +432,7 @@ export class BookingService {
   cancel(id: string): void {
     const success = this.repo.delete(id);
     if (!success) {
-      throw new Error("Booking not found");
+      throw new Error('Booking not found');
     }
   }
 
@@ -443,10 +447,10 @@ export class BookingService {
 ## src/routes/bookings.routes.ts
 
 ```ts
-import { Router } from "express";
-import { z } from "zod";
-import { BookingRepository } from "../repositories/booking.repository";
-import { BookingService } from "../services/booking.service";
+import { Router } from 'express';
+import { z } from 'zod';
+import { BookingRepository } from '../repositories/booking.repository';
+import { BookingService } from '../services/booking.service';
 
 export const bookingRouter = Router();
 
@@ -456,10 +460,10 @@ const service = new BookingService(repo);
 const createSchema = z.object({
   roomId: z.string().min(1),
   start: z.string().datetime(),
-  end: z.string().datetime()
+  end: z.string().datetime(),
 });
 
-bookingRouter.post("/bookings", (req, res) => {
+bookingRouter.post('/bookings', (req, res) => {
   try {
     const body = createSchema.parse(req.body);
     const booking = service.create(
@@ -473,7 +477,7 @@ bookingRouter.post("/bookings", (req, res) => {
   }
 });
 
-bookingRouter.delete("/bookings/:id", (req, res) => {
+bookingRouter.delete('/bookings/:id', (req, res) => {
   try {
     service.cancel(req.params.id);
     res.status(204).send();
@@ -482,7 +486,7 @@ bookingRouter.delete("/bookings/:id", (req, res) => {
   }
 });
 
-bookingRouter.get("/rooms/:roomId/bookings", (req, res) => {
+bookingRouter.get('/rooms/:roomId/bookings', (req, res) => {
   const bookings = service.listByRoom(req.params.roomId);
   res.json(bookings);
 });
@@ -500,6 +504,7 @@ bookingRouter.get("/rooms/:roomId/bookings", (req, res) => {
 ```bash
 npm install
 npm run dev
+```
 ````
 
 Palvelin:
@@ -564,7 +569,6 @@ Commit:
 
 Alkuperäinen AI-generoitu commit
 
-
 Refaktoroi
 
 esim. parempi virheenkäsittely
@@ -591,9 +595,6 @@ Jos haluat, seuraavaksi voin:
 
 👉 Mihin haluat jatkaa tästä?
 
-
 <br>
 
-
 ## Minä:
-

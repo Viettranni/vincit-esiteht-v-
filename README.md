@@ -1,4 +1,3 @@
-
 # Meeting Room Booking API
 
 ## Käynnistys
@@ -6,7 +5,7 @@
 ```bash
 npm install
 npm run dev
-````
+```
 
 Palvelin:
 [http://localhost:3000](http://localhost:3000)
@@ -26,5 +25,7 @@ Palvelin:
 ### DELETE /bookings/:id
 
 ### GET /rooms/:roomId/bookings
+
+```
 
 ```
