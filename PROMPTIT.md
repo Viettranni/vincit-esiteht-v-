@@ -621,3 +621,16 @@ Mitä varten import { z } from 'zod'; on?
 ## Cursorin vastaus:
 
 import { z } from 'zod' is used for request validation. In bookings.routes.ts it defines schemas like createSchema and availabilitySchema, then parse() validates and sanitizes input. If input is invalid, parse throws and we return 400. Without z, you’d need manual validation.
+
+## Minä:
+
+Tarkista nyt koko projekti ja analysoi, päivitä README.md sen mukaisesti miten sen kuuluu olla parhaiden käytäntöjen mukaan
+
+## Cursor:
+
+Päivitti Readme tiedoston ja --> Updated README.md to match the current implementation and best‑practice documentation: overview, assumptions, scripts, endpoint examples with responses, and validation/error behavior.
+If you want any extra sections (testing with curl/Postman, deployment notes, or environment variables), say the word.
+
+## Minä:
+
+Korjasin ja lisäsin puutteelliset tiedot
