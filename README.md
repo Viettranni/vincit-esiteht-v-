@@ -21,6 +21,8 @@ npm run dev
 Palvelin:
 [http://localhost:3000](http://localhost:3000)
 
+- Rajapintaa voi kokeilla esimerkiksi Postmanilla
+
 ## Skriptit
 
 - `npm run dev` käynnistää kehityspalvelimen
