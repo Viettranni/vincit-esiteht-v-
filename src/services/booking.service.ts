@@ -10,17 +10,21 @@ export class BookingService {
     const now = new Date();
 
     if (start >= end) {
-      throw new Error('Start time must be before end time');
+      throw new Error(
+        'Minimi varausaika on 1 päivä. Aloitusajan tulee alkaa ennen päättymisaikaa.'
+      );
     }
 
     if (start < now) {
-      throw new Error('Booking cannot be in the past');
+      throw new Error('Kokoushuoneen varaus ei voi olla menneisyydessä.');
     }
 
     const existing = this.repo.getByRoom(roomId);
     for (const booking of existing) {
       if (isOverlapping(booking.start, booking.end, start, end)) {
-        throw new Error('Booking overlaps with existing booking');
+        throw new Error(
+          'Havaittu päällekkäisyyksiä varauksissa, tarkista varaus!'
+        );
       }
     }
 
@@ -38,7 +42,9 @@ export class BookingService {
   cancel(id: string): void {
     const success = this.repo.delete(id);
     if (!success) {
-      throw new Error('Booking not found');
+      throw new Error(
+        'Kokoushuoneen varausta ei löydy. Tarkista varaustunnus.'
+      );
     }
   }
 

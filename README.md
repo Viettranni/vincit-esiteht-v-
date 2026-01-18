@@ -1,5 +1,10 @@
 # Meeting Room Booking API
 
+## Oletukset
+
+- Varauksien kestot ovat vähintään päivän mittaiset.
+- Varaajalla ei ole tietoa, että mitkä huoneet ovat varaus hetkellä saatavilla
+
 ## Käynnistys
 
 ```bash
