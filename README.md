@@ -2,8 +2,6 @@
 
 ## Oletukset
 
-- Varauksien kestot ovat vähintään päivän mittaiset.
-- Varaajalla ei ole tietoa, että mitkä huoneet ovat varaus hetkellä saatavilla
 - Käytössä on valmiiksi luodut huoneet: A25, A26, A27, A28, A29, A30
 
 ## Käynnistys

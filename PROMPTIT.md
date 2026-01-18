@@ -613,3 +613,11 @@ BookingService now enforces valid rooms and provides listAvailableRooms() for qu
 bookings.routes.ts adds GET /rooms/available with start/end query validation.
 README.md mentions the fixed room list and documents the availability endpoint.
 If you want, I can also add tests or a small curl example for the new endpoint.
+
+## Minä Cursorille:
+
+Mitä varten import { z } from 'zod'; on?
+
+## Cursorin vastaus:
+
+import { z } from 'zod' is used for request validation. In bookings.routes.ts it defines schemas like createSchema and availabilitySchema, then parse() validates and sanitizes input. If input is invalid, parse throws and we return 400. Without z, you’d need manual validation.

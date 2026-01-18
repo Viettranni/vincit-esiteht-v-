@@ -16,13 +16,11 @@ export class BookingService {
     }
   }
 
-  private validateTimeRange(start: Date, end: Date): void {
+  private validateBookingTimeRange(start: Date, end: Date): void {
     const now = new Date();
 
     if (start >= end) {
-      throw new Error(
-        'Minimi varausaika on 1 päivä. Aloitusajan tulee alkaa ennen päättymisaikaa.'
-      );
+      throw new Error('Aloitusajan tulee olla ennen lopetusaikaa.');
     }
 
     if (start < now) {
@@ -30,9 +28,15 @@ export class BookingService {
     }
   }
 
+  private validateAvailabilityTimeRange(start: Date, end: Date): void {
+    if (start >= end) {
+      throw new Error('Aloitusajan tulee olla ennen lopetusaikaa.');
+    }
+  }
+
   create(roomId: string, start: Date, end: Date): Booking {
     this.validateRoom(roomId);
-    this.validateTimeRange(start, end);
+    this.validateBookingTimeRange(start, end);
 
     const existing = this.repo.getByRoom(roomId);
     for (const booking of existing) {
@@ -54,21 +58,30 @@ export class BookingService {
     return booking;
   }
 
-  cancel(id: string): void {
+  cancel(id: string): string {
+    if (!id || typeof id !== 'string') {
+      throw new Error('Varaustunnus on virheellinen.');
+    }
+
     const success = this.repo.delete(id);
+
     if (!success) {
       throw new Error(
         'Kokoushuoneen varausta ei löydy. Tarkista varaustunnus.'
       );
     }
+
+    return 'Varaus peruutettu onnistuneesti.';
   }
 
   listByRoom(roomId: string): Booking[] {
+    this.validateRoom(roomId);
+
     return this.repo.getByRoom(roomId);
   }
 
   listAvailableRooms(start: Date, end: Date): string[] {
-    this.validateTimeRange(start, end);
+    this.validateAvailabilityTimeRange(start, end);
 
     const allBookings = this.repo.getAll();
     return ROOMS.filter((roomId) => {
